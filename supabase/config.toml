@@ -1,0 +1,63 @@
+# Supabase CLI config for local development (`supabase start`).
+# Production: mirror the [auth] values in Dashboard → Authentication (see docs/DEPLOY.md).
+project_id = "taptim"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+# Hard cap on rows returned by one request (pagination is enforced in RPCs as well).
+max_rows = 200
+
+[db]
+port = 54322
+major_version = 15
+
+[realtime]
+enabled = true
+
+[storage]
+enabled = true
+file_size_limit = "12MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+# Only these URLs may be used as redirect targets in auth emails (prevents open redirects).
+additional_redirect_urls = ["http://localhost:5173/auth/callback", "http://localhost:5173/auth/reset"]
+jwt_expiry = 3600
+# Refresh tokens are single-use; reuse of an old one revokes the session family.
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = false
+minimum_password_length = 8
+password_requirements = "letters_digits"
+
+[auth.rate_limit]
+email_sent = 4
+sign_in_sign_ups = 30
+token_refresh = 150
+token_verifications = 30
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true
+double_confirm_changes = true
+secure_password_change = true
+max_frequency = "60s"
+
+[auth.sms]
+# SMS is NOT configured: phone sign-in/verification is disabled in the app until a provider is set up.
+enable_signup = false
+
+[functions.photos]
+verify_jwt = true
+
+[functions.delete-account]
+verify_jwt = true
+
+[functions.cleanup-photos]
+# called by pg_cron with x-cron-secret, not by users
+verify_jwt = false

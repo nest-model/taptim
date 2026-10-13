@@ -1,0 +1,11 @@
+{
+  "name": "TAPTIM",
+  "short_name": "TAPTIM",
+  "description": "Потерял? Найдём. Не нужно? Передай дальше.",
+  "lang": "ru",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F8F5",
+  "theme_color": "#547A61",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
