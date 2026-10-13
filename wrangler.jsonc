@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers (static assets). The "name" must match the Worker name in the Cloudflare dashboard.
+  "name": "taptim",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./dist",
+    // SPA: any unknown path (e.g. /listing/123) returns index.html, React Router renders the page
+    "not_found_handling": "single-page-application"
+  }
+}
