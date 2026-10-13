@@ -20,6 +20,7 @@
 
 ### Шаг 1. Создать проект
 
+
 1. Открой https://supabase.com → **Start your project** → войди через GitHub (или почту).
 2. Нажми **New project**.
 3. Заполни:
