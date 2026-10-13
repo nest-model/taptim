@@ -230,3 +230,5 @@ Supabase Free: **1 ГБ** файлов, **5 ГБ** трафика в месяц,
 ## Для разработчика
 
 Если всё-таки поставишь Node.js 22 и захочешь запускать сайт у себя (`npm install`, `npm run dev`), тесты, CLI-деплой — см. [`docs/DEV.md`](docs/DEV.md), [`docs/DEPLOY.md`](docs/DEPLOY.md), безопасность — [`docs/SECURITY.md`](docs/SECURITY.md).
+
+ 
