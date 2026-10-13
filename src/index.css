@@ -1,0 +1,230 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/manrope';
+
+/* Dark mode is driven by the `.dark` class on <html> (set by theme-init.js / ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  TAPTIM design tokens — from the brief + the visual concept, checked for WCAG AA:
+  - text-secondary #737B74 → #6A726B (4.09 → 4.66:1 on background)
+  - primary text on primary-soft uses primary-ink (#456650, 5.43:1)
+  - CTA lime is SOFT (#B5DE84, not acid) and used only for the single main action on a screen,
+    always with dark text (9.8:1). Muted green stays the dominant brand colour.
+  - deep tile (#4A6E55) for the "Потерял или нашёл" hero tile, white text 5.75:1
+*/
+:root {
+  --c-bg: #f7f8f5;
+  --c-surface: #ffffff;
+  --c-surface-2: #eef1ec;
+  --c-primary: #547a61;
+  --c-primary-hover: #456650;
+  --c-primary-soft: #e6eee7;
+  --c-primary-ink: #456650;
+  --c-primary-deep: #4a6e55;
+  --c-on-primary: #ffffff;
+  --c-bubble-out: #e3efe2;
+  --c-cta: #b5de84;
+  --c-cta-hover: #a7d473;
+  --c-on-cta: #1e2a1f;
+  --c-text: #202521;
+  --c-text-2: #6a726b;
+  --c-border: #e3e7e1;
+  --c-danger: #b3412f;
+  --c-danger-soft: #fbe9e6;
+  --c-warning: #8a6417;
+  --c-warning-soft: #f7efdc;
+  --c-info-soft: #e7eef3;
+  --c-info: #3b6680;
+  color-scheme: light;
+}
+
+.dark {
+  --c-bg: #111411;
+  --c-surface: #1b201c;
+  --c-surface-2: #242b25;
+  --c-primary: #8eb69a;
+  --c-primary-hover: #a1c7ac;
+  --c-primary-soft: #293a2e;
+  --c-primary-ink: #a1c7ac;
+  --c-primary-deep: #355640;
+  --c-on-primary: #111411;
+  --c-bubble-out: #2a3a2e;
+  --c-cta: #a9d47a;
+  --c-cta-hover: #b8de8c;
+  --c-on-cta: #111411;
+  --c-text: #f2f5f1;
+  --c-text-2: #a1aaa2;
+  --c-border: #343c35;
+  --c-danger: #f09a8a;
+  --c-danger-soft: #3a2420;
+  --c-warning: #e3c27a;
+  --c-warning-soft: #352d1b;
+  --c-info-soft: #1f2b33;
+  --c-info: #9cc3db;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-primary-soft: var(--c-primary-soft);
+  --color-primary-ink: var(--c-primary-ink);
+  --color-primary-deep: var(--c-primary-deep);
+  --color-on-primary: var(--c-on-primary);
+  --color-bubble-out: var(--c-bubble-out);
+  --color-cta: var(--c-cta);
+  --color-cta-hover: var(--c-cta-hover);
+  --color-on-cta: var(--c-on-cta);
+  --color-text: var(--c-text);
+  --color-text-2: var(--c-text-2);
+  --color-line: var(--c-border);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+  --color-warning: var(--c-warning);
+  --color-warning-soft: var(--c-warning-soft);
+  --color-info: var(--c-info);
+  --color-info-soft: var(--c-info-soft);
+}
+
+@theme {
+  --radius-card: 1.125rem;
+  --shadow-card: 0 1px 2px rgb(20 30 22 / 0.04), 0 6px 18px rgb(20 30 22 / 0.05);
+  --animate-shimmer: shimmer 1.4s ease-in-out infinite;
+  @keyframes shimmer {
+    0% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.55;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  .dark .card {
+    box-shadow: none;
+  }
+  /* Smooth, unobtrusive theme switch — enabled only during a switch. */
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease,
+      fill 220ms ease !important;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 2px;
+  }
+  select.field-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236A726B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.75rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Design-system utilities (Tailwind v4 @utility: compose with @apply and variants) ── */
+@utility card {
+  @apply border-line bg-surface rounded-[var(--radius-card)] border shadow-[var(--shadow-card)];
+}
+
+/* Buttons are pills, as in the concept's design system. */
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-[15px] font-semibold transition-colors select-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-primary text-on-primary hover:bg-primary-hover;
+}
+/* The one main action of a screen (Написать / Опубликовать / Применить). */
+@utility btn-cta {
+  @apply btn bg-cta text-on-cta hover:bg-cta-hover min-h-12 text-[16px] font-bold;
+}
+@utility btn-secondary {
+  @apply btn border-primary text-primary-ink hover:bg-primary-soft border-[1.5px] bg-transparent;
+}
+@utility btn-ghost {
+  @apply btn text-text hover:bg-surface-2 px-3;
+}
+@utility btn-danger {
+  @apply btn bg-danger dark:text-bg text-white hover:opacity-90;
+}
+@utility icon-btn {
+  @apply text-text hover:bg-surface-2 inline-flex size-10 shrink-0 items-center justify-center rounded-full transition-colors;
+}
+
+@utility field-label {
+  @apply text-text mb-1.5 block text-sm font-semibold;
+}
+@utility field-input {
+  @apply border-line bg-surface text-text placeholder:text-text-2/80 focus:border-primary aria-[invalid=true]:border-danger block min-h-11 w-full rounded-xl border px-3.5 py-2.5 text-[15px] focus:outline-none;
+}
+@utility field-error {
+  @apply text-danger mt-1.5 text-sm;
+}
+@utility field-hint {
+  @apply text-text-2 mt-1.5 text-sm;
+}
+
+/* Chips: soft grey pill; selected = solid green (aria-pressed / aria-selected / checked). */
+@utility chip {
+  @apply bg-surface-2 text-text hover:bg-primary-soft aria-pressed:bg-primary aria-pressed:text-on-primary aria-selected:bg-primary aria-selected:text-on-primary inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold whitespace-nowrap transition-colors;
+}
+
+/* Segmented control (Потерянные | Найденные). */
+@utility segment {
+  @apply bg-surface-2 flex gap-1 rounded-full p-1;
+}
+@utility segment-item {
+  @apply text-text-2 aria-selected:bg-primary aria-selected:text-on-primary flex min-h-10 flex-1 items-center justify-center rounded-full px-3 text-[15px] font-semibold whitespace-nowrap transition-colors;
+}
+
+@utility badge {
+  @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-bold;
+}
+
+@utility skeleton {
+  @apply animate-shimmer bg-surface-2 rounded-lg;
+}
+
+/* User text: always wrap long words/URLs instead of overflowing. */
+@utility user-text {
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
